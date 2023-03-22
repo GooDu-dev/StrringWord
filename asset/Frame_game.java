@@ -26,8 +26,13 @@ public class Frame_game extends JFrame {
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
 
+<<<<<<< Updated upstream
         mainMenu();
         // singleMainGame();
+=======
+        // mainMenu();
+        singleMainGame();
+>>>>>>> Stashed changes
         // multiplayerMainGame();
         // gameOverMenu();
         this.setVisible(true);
@@ -71,7 +76,10 @@ public class Frame_game extends JFrame {
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
     
         // Add the panel to the frame
+<<<<<<< Updated upstream
         // this.add(mainMenuPanel, BorderLayout.CENTER);
+=======
+>>>>>>> Stashed changes
         getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
     }
     
@@ -102,15 +110,24 @@ public class Frame_game extends JFrame {
     }
 
     public void singleMainGame(){
+<<<<<<< Updated upstream
+=======
+        // create panel and set Layout Outer
+>>>>>>> Stashed changes
         setLayout(new BorderLayout());
         scorePanel = new JPanel();
         wordPanel = new JPanel();
         textPanel = new JPanel();
 
+<<<<<<< Updated upstream
+=======
+        // use for cheack area panel Can Delete If you want
+>>>>>>> Stashed changes
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         textPanel.setBackground(Color.green);
 
+<<<<<<< Updated upstream
         scorePanel.setLayout(new BorderLayout());
         // scorePanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.X_AXIS));
         singlePlayerScore = new JLabel("Score single");
@@ -122,10 +139,17 @@ public class Frame_game extends JFrame {
         lifeLabel.setForeground(Color.magenta);
 
         // timeLabel.setHorizontalTextPosition(JLabel.CENTER);
+=======
+        scorePanel.setLayout(new FlowLayout(FlowLayout.CENTER,85,5));
+        singlePlayerScore = new JLabel("Score single : ");
+        timeLabel = new JLabel("60", SwingConstants.CENTER);
+        lifeLabel = new JLabel("LIFE : ");
+>>>>>>> Stashed changes
 
         scorePanel.add(singlePlayerScore, BorderLayout.WEST);
         scorePanel.add(timeLabel, BorderLayout.CENTER);
         scorePanel.add(lifeLabel, BorderLayout.EAST);
+<<<<<<< Updated upstream
         scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
 
 
@@ -140,6 +164,20 @@ public class Frame_game extends JFrame {
         textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
         textPanel.add(typeTextField);
 
+=======
+        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+
+        // todo : add logic label here
+
+        // set text field 
+        typeTextField = new JTextField(20);
+        typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
+        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
+        textPanel.add(typeTextField);
+
+        // add each panel to frame
+>>>>>>> Stashed changes
         getContentPane().add(scorePanel, BorderLayout.NORTH);
         getContentPane().add(wordPanel, BorderLayout.CENTER);
         getContentPane().add(textPanel, BorderLayout.SOUTH);
@@ -151,15 +189,25 @@ public class Frame_game extends JFrame {
         wordPanel = new JPanel();
         textPanel = new JPanel();
 
+<<<<<<< Updated upstream
+=======
+        // use for cheack area panel Can Delete If you want
+>>>>>>> Stashed changes
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         textPanel.setBackground(Color.green);
 
         scorePanel.setLayout(new BorderLayout());
+<<<<<<< Updated upstream
         // scorePanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.X_AXIS));
         p1Score = new JLabel("P1 Score");
         timeLabel = new JLabel("timeLabel 60", SwingConstants.CENTER);
         p2Score = new JLabel("P2 Score");
+=======
+        p1Score = new JLabel("P1 Score : ");
+        timeLabel = new JLabel("60", SwingConstants.CENTER);
+        p2Score = new JLabel("P2 Score : ");
+>>>>>>> Stashed changes
 
         p1Score.setForeground(Color.magenta);
         timeLabel.setForeground(Color.blue);
@@ -170,6 +218,7 @@ public class Frame_game extends JFrame {
         scorePanel.add(p1Score, BorderLayout.WEST);
         scorePanel.add(timeLabel, BorderLayout.CENTER);
         scorePanel.add(p2Score, BorderLayout.EAST);
+<<<<<<< Updated upstream
         scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
 
 
@@ -182,6 +231,19 @@ public class Frame_game extends JFrame {
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
         textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
+=======
+        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+
+
+        // todo : add logic label here
+        JLabel randomWord = new JLabel();
+        wordPanel.add(randomWord);
+
+        typeTextField = new JTextField(20);
+        typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
+        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
+>>>>>>> Stashed changes
         textPanel.add(typeTextField);
 
         getContentPane().add(scorePanel, BorderLayout.NORTH);
