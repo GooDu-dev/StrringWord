@@ -1,5 +1,5 @@
 package asset;
 
-public class App {
-    
+public class App{
+
 }
