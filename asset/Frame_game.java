@@ -5,8 +5,7 @@ import java.awt.*;
 
 public class Frame_game extends JFrame {
     private JButton play, multiplayer, exit,back, mainMenuButton;
-    private JPanel mainMenuPanel, scorePanel, wordPanel, textPanel, typeTextPanel;
-    private JLabel singlePlayerScore, p1Score, p2Score, timeLabel, lifeLabel;
+    private JPanel mainMenuPanel, scorePanel, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
     
     public Frame_game(){
@@ -26,15 +25,11 @@ public class Frame_game extends JFrame {
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
 
-<<<<<<< Updated upstream
-        mainMenu();
-        // singleMainGame();
-=======
         // mainMenu();
-        singleMainGame();
->>>>>>> Stashed changes
+        // singleMainGame();
         // multiplayerMainGame();
         // gameOverMenu();
+
         this.setVisible(true);
     }
 
@@ -76,17 +71,13 @@ public class Frame_game extends JFrame {
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
     
         // Add the panel to the frame
-<<<<<<< Updated upstream
-        // this.add(mainMenuPanel, BorderLayout.CENTER);
-=======
->>>>>>> Stashed changes
         getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
     }
     
     public void clearScreen() {
-        getContentPane().removeAll();
-        getContentPane().revalidate();
-        getContentPane().repaint();
+        this.getContentPane().removeAll();
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
     }
 
     public void ConnectIP(){
@@ -110,62 +101,29 @@ public class Frame_game extends JFrame {
     }
 
     public void singleMainGame(){
-<<<<<<< Updated upstream
-=======
         // create panel and set Layout Outer
->>>>>>> Stashed changes
-        setLayout(new BorderLayout());
         scorePanel = new JPanel();
         wordPanel = new JPanel();
         textPanel = new JPanel();
 
-<<<<<<< Updated upstream
-=======
+        // panel of scorePanel Inner
+        score = new JPanel();
+        time = new JPanel();
+        Life = new JPanel();
+
         // use for cheack area panel Can Delete If you want
->>>>>>> Stashed changes
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         textPanel.setBackground(Color.green);
 
-<<<<<<< Updated upstream
-        scorePanel.setLayout(new BorderLayout());
-        // scorePanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.X_AXIS));
-        singlePlayerScore = new JLabel("Score single");
-        timeLabel = new JLabel("timeLabel 60", SwingConstants.CENTER);
-        lifeLabel = new JLabel("LIFE");
+        // scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+        score.add(new JLabel("Score : 0"));
+        time.add(new JLabel("Time : 0"));
+        Life.add(new JLabel("Life : 100%"));
 
-        singlePlayerScore.setForeground(Color.magenta);
-        timeLabel.setForeground(Color.blue);
-        lifeLabel.setForeground(Color.magenta);
-
-        // timeLabel.setHorizontalTextPosition(JLabel.CENTER);
-=======
-        scorePanel.setLayout(new FlowLayout(FlowLayout.CENTER,85,5));
-        singlePlayerScore = new JLabel("Score single : ");
-        timeLabel = new JLabel("60", SwingConstants.CENTER);
-        lifeLabel = new JLabel("LIFE : ");
->>>>>>> Stashed changes
-
-        scorePanel.add(singlePlayerScore, BorderLayout.WEST);
-        scorePanel.add(timeLabel, BorderLayout.CENTER);
-        scorePanel.add(lifeLabel, BorderLayout.EAST);
-<<<<<<< Updated upstream
-        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
-
-
-        // todo : add logic label here
-        JLabel randomWord = new JLabel("RAndom Multiplayer");
-        wordPanel.add(randomWord);
-
-        typeTextField = new JTextField("lorem lorem lorem ................ lorem lorem lorem");
-        // textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
-        typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
-        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
-        textPanel.add(typeTextField);
-
-=======
-        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+        scorePanel.add(score,BorderLayout.WEST);
+        scorePanel.add(time,BorderLayout.CENTER);
+        scorePanel.add(Life,BorderLayout.EAST);
 
         // todo : add logic label here
 
@@ -177,63 +135,41 @@ public class Frame_game extends JFrame {
         textPanel.add(typeTextField);
 
         // add each panel to frame
->>>>>>> Stashed changes
-        getContentPane().add(scorePanel, BorderLayout.NORTH);
-        getContentPane().add(wordPanel, BorderLayout.CENTER);
-        getContentPane().add(textPanel, BorderLayout.SOUTH);
+        this.getContentPane().add(scorePanel, BorderLayout.NORTH);
+        this.getContentPane().add(wordPanel, BorderLayout.CENTER);
+        this.getContentPane().add(textPanel, BorderLayout.SOUTH);
     }
     
     public void multiplayerMainGame(){
+        // create panel and set Layout Outer
         setLayout(new BorderLayout());
         scorePanel = new JPanel();
         wordPanel = new JPanel();
         textPanel = new JPanel();
 
-<<<<<<< Updated upstream
-=======
+        // panel of scorePanel Inner
+        score_p1 = new JPanel();
+        score_p2 = new JPanel();
+        time = new JPanel();
+
         // use for cheack area panel Can Delete If you want
->>>>>>> Stashed changes
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         textPanel.setBackground(Color.green);
 
-        scorePanel.setLayout(new BorderLayout());
-<<<<<<< Updated upstream
-        // scorePanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.X_AXIS));
-        p1Score = new JLabel("P1 Score");
-        timeLabel = new JLabel("timeLabel 60", SwingConstants.CENTER);
-        p2Score = new JLabel("P2 Score");
-=======
-        p1Score = new JLabel("P1 Score : ");
-        timeLabel = new JLabel("60", SwingConstants.CENTER);
-        p2Score = new JLabel("P2 Score : ");
->>>>>>> Stashed changes
+        // scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+        score_p1.add(new JLabel("Score P1 : 0"));
+        score_p2.add(new JLabel("Score P2 : 0"));
+        time.add(new JLabel("Time : 0"));
 
-        p1Score.setForeground(Color.magenta);
-        timeLabel.setForeground(Color.blue);
-        p2Score.setForeground(Color.magenta);
+        scorePanel.add(score_p1,BorderLayout.WEST);
+        scorePanel.add(time,BorderLayout.CENTER);
+        scorePanel.add(score_p2,BorderLayout.EAST);
 
-        // timeLabel.setHorizontalTextPosition(JLabel.CENTER);
-
-        scorePanel.add(p1Score, BorderLayout.WEST);
-        scorePanel.add(timeLabel, BorderLayout.CENTER);
-        scorePanel.add(p2Score, BorderLayout.EAST);
-<<<<<<< Updated upstream
-        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
-
-
-        // todo : add logic label here
-        JLabel randomWord = new JLabel("Random word dummy dummy dummy");
-        wordPanel.add(randomWord);
-
-        typeTextField = new JTextField("lorem lorem lorem ................ lorem lorem lorem");
-        // textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
-        typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
-        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.3f)));
-=======
+        scorePanel.add(score_p1, BorderLayout.WEST);
+        scorePanel.add(time, BorderLayout.CENTER);
+        scorePanel.add(score_p2, BorderLayout.EAST);
         scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
-
 
         // todo : add logic label here
         JLabel randomWord = new JLabel();
@@ -243,7 +179,6 @@ public class Frame_game extends JFrame {
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
         textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
->>>>>>> Stashed changes
         textPanel.add(typeTextField);
 
         getContentPane().add(scorePanel, BorderLayout.NORTH);
@@ -256,6 +191,7 @@ public class Frame_game extends JFrame {
 
         this.setLayout(null);
         mainMenuButton = new JButton("Main Menu");
+        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 24));
         mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
         getContentPane().add(mainMenuButton);
         mainMenuButton.addActionListener(e -> {
