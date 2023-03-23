@@ -6,9 +6,8 @@ public class Counting extends Thread{
     public Counting(int n){
         this.n = n;
     }
-    public Counting(int n, Runnable runnable){
+    public Counting(Runnable runnable){
         super(runnable);
-        this.n = n;
         this.runnable = runnable;
     }
     @Override
