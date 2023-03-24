@@ -1,12 +1,25 @@
 package asset;
 
+import javax.print.attribute.standard.Severity;
 import javax.swing.*;
+
+import asset.scripts.Server;
+import asset.scripts.User;
+
 import java.awt.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Frame_game extends JFrame {
     private JButton play, multiplayer, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, scorePanel, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
+
+    // Server & Clients
+    private ServerSocket serverSocket;
+    private Server server;
+    private Thread server_thread;
     
     public Frame_game(){
         DEFAULT();
@@ -82,6 +95,31 @@ public class Frame_game extends JFrame {
 
     public void ConnectIP(){
         clearScreen(); 
+
+        // 
+        // String ip = Server.generateIP();
+        // if(ip != null){
+        //     if(server == null){
+        //         try{
+        //             serverSocket = new ServerSocket(1234);
+        //             Server server = new Server(serverSocket);
+        //             server_thread = new Thread(new Runnable(){
+        //                 @Override
+        //                 public void run() {
+        //                     while(!serverSocket.isClosed()){
+        //                         server.start();
+        //                     }
+        //                 }
+        //             });
+        //             server_thread.start();
+        //         }
+        //         catch(IOException e){
+        //             System.out.println(e);
+        //             clearServer();
+        //         }
+        //     }
+        // }
+
 
         // set back button to bottom
         this.setLayout(null);
@@ -211,5 +249,11 @@ public class Frame_game extends JFrame {
             clearScreen();
             mainMenu();
         });
+    }
+    public void clearServer(){
+        try{
+            if(server != null) server.stop();
+            
+        }
     }
 }
