@@ -252,8 +252,9 @@ public class Frame_game extends JFrame {
     }
     public void clearServer(){
         try{
-            if(server != null) server.stop();
-            
+            if(server != null) server.stop();   
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
