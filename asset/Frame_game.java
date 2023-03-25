@@ -108,31 +108,31 @@ public class Frame_game extends JFrame {
 
     public void ConnectIP(){
         clearScreen(); 
-
-        // 
-        // String ip = Server.generateIP();
-        // if(ip != null){
-        //     if(server == null){
-        //         try{
-        //             serverSocket = new ServerSocket(1234);
-        //             Server server = new Server(serverSocket);
-        //             server_thread = new Thread(new Runnable(){
-        //                 @Override
-        //                 public void run() {
-        //                     while(!serverSocket.isClosed()){
-        //                         server.start();
-        //                     }
-        //                 }
-        //             });
-        //             server_thread.start();
-        //         }
-        //         catch(IOException e){
-        //             System.out.println(e);
-        //             clearServer();
-        //         }
-        //     }
-        // }
-
+        
+        String ip = Server.generateIP();
+        if(ip != null){
+            if(server == null){
+                try{
+                    serverSocket = new ServerSocket(1234);
+                    Server server = new Server(serverSocket);
+                    server_thread = new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            while(!serverSocket.isClosed()){
+                                server.start();
+                            }
+                            server.stop();
+                            clearServer();
+                        }
+                    });
+                    server_thread.start();
+                }
+                catch(IOException e){
+                    System.out.println(e);
+                    clearServer();
+                }
+            }
+        }
 
         // set back button to bottom
         this.setLayout(null);
