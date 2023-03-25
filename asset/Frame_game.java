@@ -38,7 +38,7 @@ public class Frame_game extends JFrame {
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
 
-        // mainMenu();
+        mainMenu();
         // singleMainGame();
         // multiplayerMainGame();
         // gameOverMenu();
@@ -49,6 +49,7 @@ public class Frame_game extends JFrame {
 
     public void mainMenu() {
         // Create a JPanel with BoxLayout and center alignment
+        clearScreen();
         mainMenuPanel = new JPanel();
         mainMenuPanel.setBackground(Color.YELLOW);
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
@@ -56,18 +57,27 @@ public class Frame_game extends JFrame {
         mainMenuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
     
         // create PLAY button
-        play = new JButton("PLAY");
+        play = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
         play.addActionListener(e -> {
+            singleMainGame();
+        });
+        play.setOpaque(false);
+        play.setContentAreaFilled(false);
+        play.setBorderPainted(false);
+        // create MULTIPLAYER button
+        multiplayer = new JButton(new ImageIcon("asset/picture/button/multiplayer-button.png"));
+        multiplayer.addActionListener(e -> {
             ConnectIP();
         });
-        // create MULTIPLAYER button
-        multiplayer = new JButton("MULTIPLAYER");
-        multiplayer.addActionListener(e -> {
-            // add action multiplayer
-        });
+        multiplayer.setOpaque(false);
+        multiplayer.setContentAreaFilled(false);
+        multiplayer.setBorderPainted(false);
         // create EXIT button
-        exit = new JButton("EXIT");
+        exit = new JButton(new ImageIcon("asset/picture/button/exit-button.png"));
         exit.addActionListener(e -> System.exit(0));
+        exit.setOpaque(false);
+        exit.setContentAreaFilled(false);
+        exit.setBorderPainted(false);
     
         // Add the buttons to the mainMenuPanel
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
@@ -123,15 +133,16 @@ public class Frame_game extends JFrame {
 
         // set back button to bottom
         this.setLayout(null);
-        back = new JButton("Back");
+        back = new JButton(new ImageIcon("asset/picture/button/back-button.png"));
         back.setBounds(new Rectangle(100, 450, 200, 65));
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
         getContentPane().add(back);
         back.addActionListener(e -> {
-            clearScreen();
+            // clearScreen();
             // mainMenu();
             System.out.println("Debug connect ip here !");
-
-            getContentPane().setBackground(Color.red);
             mainMenu();
             revalidate();
             repaint();
