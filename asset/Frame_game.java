@@ -159,6 +159,8 @@ public class Frame_game extends JFrame {
 
     public void singleMainGame(){
         clearScreen();
+        backgroundImageJFrame("asset/picture/background/Artboard 3.png");
+
         // create panel and set Layout Outer
         scorePanel = new JPanel();
         wordPanel = new JPanel();
@@ -172,9 +174,9 @@ public class Frame_game extends JFrame {
         // use for cheack area panel Can Delete If you want
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
+        wordPanel.setBorder(BorderFactory.createEmptyBorder(450, 600, 0, 0));
         textPanel.setBackground(Color.green);
 
-        // scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
         JLabel time_number = new JLabel("Time : 10");
         Counting timeCurrent = new Counting(10, time_number);
         timeCurrent.start();
@@ -190,15 +192,12 @@ public class Frame_game extends JFrame {
         typeTextField = new JTextField(20);
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
-        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
         textPanel.add(typeTextField);
 
         // add each panel to frame
         this.getContentPane().add(scorePanel, BorderLayout.NORTH);
         this.getContentPane().add(wordPanel, BorderLayout.CENTER);
-        this.getContentPane().add(textPanel, BorderLayout.SOUTH);
-
-        
+        this.getContentPane().add(textPanel, BorderLayout.SOUTH);   
     }
     
     public void multiplayerMainGame(){
