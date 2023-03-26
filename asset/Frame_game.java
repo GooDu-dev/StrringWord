@@ -13,7 +13,7 @@ import java.net.Socket;
 
 public class Frame_game extends JFrame {
     private JButton play, multiplayer, exit,back, mainMenuButton;
-    private JPanel mainMenuPanel, scorePanel, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
+    private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
 
     // Server & Clients
@@ -24,10 +24,12 @@ public class Frame_game extends JFrame {
     public Frame_game(){
         DEFAULT();
     }
+
     public Frame_game(String name) {
         this.setTitle(name);
         DEFAULT();
     }
+    
     public void DEFAULT(){
         this.setSize(400, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,17 +39,13 @@ public class Frame_game extends JFrame {
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
-
         mainMenu();
-        // singleMainGame();
-        // multiplayerMainGame();
-        // gameOverMenu();
-
         this.setVisible(true);
     }
 
 
     public void mainMenu() {
+        clearScreen();
         // Create a JPanel with BoxLayout and center alignment
         clearScreen();
         backgroundImageJFrame("asset/picture/background/Artboard-1.png");
@@ -98,41 +96,44 @@ public class Frame_game extends JFrame {
     
         // Add the panel to the frame
         getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
+
+        revalidate();
+        repaint();
     }
     
     public void clearScreen() {
-        this.getContentPane().removeAll();
-        this.getContentPane().revalidate();
-        this.getContentPane().repaint();
+        getContentPane().removeAll();
+        getContentPane().revalidate();
+        getContentPane().repaint();
     }
 
     public void ConnectIP(){
         clearScreen(); 
-
-        // 
-        // String ip = Server.generateIP();
-        // if(ip != null){
-        //     if(server == null){
-        //         try{
-        //             serverSocket = new ServerSocket(1234);
-        //             Server server = new Server(serverSocket);
-        //             server_thread = new Thread(new Runnable(){
-        //                 @Override
-        //                 public void run() {
-        //                     while(!serverSocket.isClosed()){
-        //                         server.start();
-        //                     }
-        //                 }
-        //             });
-        //             server_thread.start();
-        //         }
-        //         catch(IOException e){
-        //             System.out.println(e);
-        //             clearServer();
-        //         }
-        //     }
-        // }
-
+        
+        String ip = Server.generateIP();
+        if(ip != null){
+            if(server == null){
+                try{
+                    serverSocket = new ServerSocket(1234);
+                    Server server = new Server(serverSocket);
+                    server_thread = new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            while(!serverSocket.isClosed()){
+                                server.start();
+                            }
+                            server.stop();
+                            clearServer();
+                        }
+                    });
+                    server_thread.start();
+                }
+                catch(IOException e){
+                    System.out.println(e);
+                    clearServer();
+                }
+            }
+        }
 
         // set back button to bottom
         this.setLayout(null);
@@ -147,12 +148,11 @@ public class Frame_game extends JFrame {
             // mainMenu();
             System.out.println("Debug connect ip here !");
             mainMenu();
-            revalidate();
-            repaint();
         });
     }
 
     public void singleMainGame(){
+        clearScreen();
         // create panel and set Layout Outer
         scorePanel = new JPanel();
         wordPanel = new JPanel();
@@ -193,35 +193,36 @@ public class Frame_game extends JFrame {
     }
     
     public void multiplayerMainGame(){
+        clearScreen();
         // create panel and set Layout Outer
         setLayout(new BorderLayout());
-        scorePanel = new JPanel();
+        scorePanelMulti = new JPanel();
         wordPanel = new JPanel();
         textPanel = new JPanel();
 
-        // panel of scorePanel Inner
+        // panel of scorePanelMulti Inner
         score_p1 = new JPanel();
         score_p2 = new JPanel();
         time = new JPanel();
 
         // use for cheack area panel Can Delete If you want
-        scorePanel.setBackground(Color.orange);
+        scorePanelMulti.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         textPanel.setBackground(Color.green);
 
-        // scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+        // scorePanelMulti.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
         score_p1.add(new JLabel("Score P1 : 0"));
         score_p2.add(new JLabel("Score P2 : 0"));
         time.add(new JLabel("Time : 0"));
 
-        scorePanel.add(score_p1,BorderLayout.WEST);
-        scorePanel.add(time,BorderLayout.CENTER);
-        scorePanel.add(score_p2,BorderLayout.EAST);
+        scorePanelMulti.add(score_p1,BorderLayout.WEST);
+        scorePanelMulti.add(time,BorderLayout.CENTER);
+        scorePanelMulti.add(score_p2,BorderLayout.EAST);
 
-        scorePanel.add(score_p1, BorderLayout.WEST);
-        scorePanel.add(time, BorderLayout.CENTER);
-        scorePanel.add(score_p2, BorderLayout.EAST);
-        scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
+        scorePanelMulti.add(score_p1, BorderLayout.WEST);
+        scorePanelMulti.add(time, BorderLayout.CENTER);
+        scorePanelMulti.add(score_p2, BorderLayout.EAST);
+        scorePanelMulti.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
 
         // todo : add logic label here
         JLabel randomWord = new JLabel();
@@ -233,7 +234,7 @@ public class Frame_game extends JFrame {
         textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
         textPanel.add(typeTextField);
 
-        getContentPane().add(scorePanel, BorderLayout.NORTH);
+        getContentPane().add(scorePanelMulti, BorderLayout.NORTH);
         getContentPane().add(wordPanel, BorderLayout.CENTER);
         getContentPane().add(textPanel, BorderLayout.SOUTH);
     }
