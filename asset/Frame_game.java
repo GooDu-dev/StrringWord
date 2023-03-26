@@ -12,6 +12,8 @@ import asset.scripts.User;
 import asset.scripts.Word;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,7 +22,6 @@ public class Frame_game extends JFrame {
     private JButton play, bot, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
-    public static int lifePoint = 3;
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -174,7 +175,7 @@ public class Frame_game extends JFrame {
         time = new JPanel();
         Life = new JPanel();
 
-        // use for cheack area panel Can Delete If you want
+        // use for check area panel Can Delete If you want
         scorePanel.setBackground(Color.orange);
         wordPanel.setBackground(Color.cyan);
         wordPanel.setBorder(BorderFactory.createEmptyBorder(450, 600, 0, 0));
@@ -184,11 +185,10 @@ public class Frame_game extends JFrame {
         JLabel life_Label = new JLabel("Life : 3");
         Counting timeCurrent = new Counting(10, time_number, life_Label, this);
         timeCurrent.start();
-        score.add(new JLabel("Score : "+ Data.getScore()));
+        score.add(new JLabel("Score : "+ Data.score));
         time.add(time_number);
         Life.add(life_Label);
-        
-
+        System.out.println(Word.word);
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
         scorePanel.add(Life,BorderLayout.EAST);
@@ -198,6 +198,23 @@ public class Frame_game extends JFrame {
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
         textPanel.add(typeTextField);
+        typeTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                System.out.println("TextField : "+typeTextField.getText());
+                System.out.println("Word.word : "+Word.word);
+                System.out.println(typeTextField.getText().equals(Word.word));
+                if(typeTextField.getText().equals(Word.word)){
+                    Word.word = Word.getRandomWord();
+                    timeCurrent.n = 10;
+                    Data.score++;
+                }
+                else{
+                    
+                }
+            }
+        });
 
         // add each panel to frame
         this.getContentPane().add(scorePanel, BorderLayout.NORTH);
@@ -281,13 +298,13 @@ public class Frame_game extends JFrame {
         }
     }
     public void hurt(JLabel time_number, JLabel life_text){
-        lifePoint--;
-        if(lifePoint <= 0){
+        Data.life--;
+        if(Data.life <= 0){
             gameOverMenu();
         }
         time_number.setText("Time : 10");
         Counting c = new Counting(10, time_number, life_text, this);
         c.start();
-        life_text.setText("Life : "+lifePoint);
+        life_text.setText("Life : "+Data.life);
     }
 }

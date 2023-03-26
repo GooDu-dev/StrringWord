@@ -11,8 +11,10 @@ import java.util.HashMap;
 
 public class Data {
     private static final String PATH = "./asset/data/data.txt";
-    private static Map<String, Integer> data = new HashMap<String, Integer>();
+    private static Map<String, Integer> data = loadSaved();
     private static final String CHAPTER = "chapter", EPISODE = "episode", HIGHEST_SCORE = "highestScore";
+
+    public static int life = 3, score = 0;
 
     private static Map<String, Integer> loadSaved(){
         Map<String, Integer> d = new HashMap<String, Integer>();

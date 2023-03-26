@@ -11,7 +11,7 @@ public class Word {
     private static ArrayList<String> words = new ArrayList<String>();
     protected static ArrayList<String> usedWords = new ArrayList<String>();
 
-    public static String word="";
+    public static String word = getRandomWord();
 
     private static ArrayList<String> loadWord(){
         ArrayList<String> data = new ArrayList<String>();
