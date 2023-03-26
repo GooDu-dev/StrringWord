@@ -17,10 +17,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Frame_game extends JFrame {
-    private JButton play, bot, exit,back, mainMenuButton;
-    private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
+    private JButton play, bot, exit,back, mainMenuButton,easy,medium,hard;
+    private JPanel mainMenuPanel,selectMenu,scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
+<<<<<<< Updated upstream
     public static int lifePoint = 3;
+=======
+    private JLabel time_number,word;
+>>>>>>> Stashed changes
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -45,8 +49,9 @@ public class Frame_game extends JFrame {
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
-        mainMenu();
-        // singleMainGame();
+        // mainMenu();
+        // selectLevel();
+        singleMainGame();
         // gameOverMenu();
         // timeUpMenu();
         this.setVisible(true);
@@ -54,7 +59,6 @@ public class Frame_game extends JFrame {
 
 
     public void mainMenu() {
-        clearScreen();
         // Create a JPanel with BoxLayout and center alignment
         clearScreen();
         backgroundImageJFrame("asset/picture/background/Artboard-1.png");
@@ -69,7 +73,7 @@ public class Frame_game extends JFrame {
         // create PLAY button
         play = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
         play.addActionListener(e -> {
-            singleMainGame();
+            selectLevel();
         });
         play.setOpaque(false);
         play.setContentAreaFilled(false);
@@ -77,7 +81,7 @@ public class Frame_game extends JFrame {
         // create MULTIPLAYER button
         bot = new JButton(new ImageIcon("asset/picture/button/bot-button.png"));
         bot.addActionListener(e -> {
-            ConnectIP();
+            bot();
         });
         bot.setOpaque(false);
         bot.setContentAreaFilled(false);
@@ -116,53 +120,106 @@ public class Frame_game extends JFrame {
         getContentPane().repaint();
     }
 
-    public void ConnectIP(){
-        clearScreen(); 
+    // public void ConnectIP(){
+    //     clearScreen(); 
         
-        String ip = Server.generateIP();
-        if(ip != null){
-            if(server == null){
-                try{
-                    serverSocket = new ServerSocket(1234);
-                    Server server = new Server(serverSocket);
-                    server_thread = new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            while(!serverSocket.isClosed()){
-                                server.start();
-                            }
-                            server.stop();
-                            clearServer();
-                        }
-                    });
-                    server_thread.start();
-                }
-                catch(IOException e){
-                    System.out.println(e);
-                    clearServer();
-                }
-            }
-        }
+    //     String ip = Server.generateIP();
+    //     if(ip != null){
+    //         if(server == null){
+    //             try{
+    //                 serverSocket = new ServerSocket(1234);
+    //                 Server server = new Server(serverSocket);
+    //                 server_thread = new Thread(new Runnable(){
+    //                     @Override
+    //                     public void run() {
+    //                         while(!serverSocket.isClosed()){
+    //                             server.start();
+    //                         }
+    //                         server.stop();
+    //                         clearServer();
+    //                     }
+    //                 });
+    //                 server_thread.start();
+    //             }
+    //             catch(IOException e){
+    //                 System.out.println(e);
+    //                 clearServer();
+    //             }
+    //         }
+    //     }
 
-        // set back button to bottom
-        this.setLayout(null);
-        back = new JButton(new ImageIcon("asset/picture/button/back-button.png"));
-        back.setBounds(new Rectangle(100, 450, 200, 65));
-        back.setOpaque(false);
-        back.setContentAreaFilled(false);
-        back.setBorderPainted(false);
-        getContentPane().add(back);
-        back.addActionListener(e -> {
-            // clearScreen();
-            // mainMenu();
-            System.out.println("Debug connect ip here !");
-            mainMenu();
+    //     // set back button to bottom
+    //     this.setLayout(null);
+    //     back = new JButton(new ImageIcon("asset/picture/button/back-button.png"));
+    //     back.setBounds(new Rectangle(100, 450, 200, 65));
+    //     back.setOpaque(false);
+    //     back.setContentAreaFilled(false);
+    //     back.setBorderPainted(false);
+    //     getContentPane().add(back);
+    //     back.addActionListener(e -> {
+    //         // clearScreen();
+    //         // mainMenu();
+    //         System.out.println("Debug connect ip here !");
+    //         mainMenu();
+    //     });
+    // }
+    public void selectLevel() {
+        // Create a JPanel with BoxLayout and center alignment
+        clearScreen();
+        selectMenu = new JPanel();
+        selectMenu.setBackground(new Color(255, 255, 255, 128));
+        selectMenu.setOpaque(false);
+        selectMenu.setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
+        selectMenu.setLayout(new BoxLayout(selectMenu, BoxLayout.Y_AXIS));
+        selectMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
+    
+        // create east button
+        easy = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
+        easy.addActionListener(e -> {
+            singleMainGame();
         });
+        easy.setOpaque(false);
+        easy.setContentAreaFilled(false);
+        easy.setBorderPainted(false);
+        // create medium button
+        medium = new JButton(new ImageIcon("asset/picture/button/bot-button.png"));
+        medium.addActionListener(e -> {
+            singleMainGame();
+        });
+        medium.setOpaque(false);
+        medium.setContentAreaFilled(false);
+        medium.setBorderPainted(false);
+        // create hard button
+        hard = new JButton(new ImageIcon("asset/picture/button/exit-button.png"));
+        hard.addActionListener(e -> System.exit(0));
+        hard.setOpaque(false);
+        hard.setContentAreaFilled(false);
+        hard.setBorderPainted(false);
+    
+        // Add the buttons to the mainMenuPanel
+        selectMenu.add(Box.createVerticalGlue()); // push buttons towards center vertically
+        selectMenu.add(easy);
+        selectMenu.add(Box.createVerticalStrut(20)); //space
+        selectMenu.add(medium);
+        selectMenu.add(Box.createVerticalStrut(20)); //space
+        selectMenu.add(hard);
+        selectMenu.add(Box.createVerticalGlue()); // push buttons towards center vertically
+    
+        // set button to center
+        easy.setAlignmentX(Component.CENTER_ALIGNMENT);
+        medium.setAlignmentX(Component.CENTER_ALIGNMENT);
+        hard.setAlignmentX(Component.CENTER_ALIGNMENT);
+    
+        // Add the panel to the frame
+        getContentPane().add(selectMenu, BorderLayout.CENTER);
+
+        revalidate();
+        repaint();
     }
 
     public void singleMainGame(){
         clearScreen();
-        backgroundImageJFrame("asset/picture/background/Artboard 3.png");
 
         // create panel and set Layout Outer
         scorePanel = new JPanel();
@@ -174,12 +231,20 @@ public class Frame_game extends JFrame {
         time = new JPanel();
         Life = new JPanel();
 
-        // use for cheack area panel Can Delete If you want
-        scorePanel.setBackground(Color.orange);
-        wordPanel.setBackground(Color.cyan);
-        wordPanel.setBorder(BorderFactory.createEmptyBorder(450, 600, 0, 0));
-        textPanel.setBackground(Color.green);
+        //set color panel
+        scorePanel.setBackground(Color.WHITE);
+        wordPanel.setBackground(Color.GREEN);
+        textPanel.setBackground(Color.DARK_GRAY);
 
+        word = new JLabel("I love you");
+        word.setFont(new Font("Verdana",Font.BOLD ,14));
+        word.setForeground(Color.WHITE);
+        wordPanel.setLayout(new BorderLayout());
+        word.setHorizontalAlignment(JLabel.CENTER);
+        word.setVerticalAlignment(JLabel.CENTER);
+        wordPanel.add(word,BorderLayout.CENTER);
+
+<<<<<<< Updated upstream
         JLabel time_number = new JLabel("Time : 10");
         JLabel life_Label = new JLabel("Life : 3");
         Counting timeCurrent = new Counting(10, time_number, life_Label, this);
@@ -188,6 +253,17 @@ public class Frame_game extends JFrame {
         time.add(time_number);
         Life.add(life_Label);
         
+=======
+        time_number = new JLabel("Time : 10");
+        Counting timeCurrent = new Counting(10, time_number);
+        timeCurrent.start();
+        score.add(new JLabel("Score : "+ Data.getScore())).setFont(new Font("Verdana",Font.BOLD ,14));
+        score.setOpaque(false);
+        time.add(time_number).setFont(new Font("Verdana",Font.BOLD ,14 ));
+        time.setOpaque(false);
+        Life.add(new JLabel("Life : 100%")).setFont(new Font("Verdana",Font.BOLD ,14 ));
+        Life.setOpaque(false);
+>>>>>>> Stashed changes
 
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
@@ -197,16 +273,22 @@ public class Frame_game extends JFrame {
         typeTextField = new JTextField(20);
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
+        typeTextField.setFont(new Font("Arial",Font.BOLD ,18 ));
+        typeTextField.setPreferredSize(new Dimension(150, 50));
+        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.15f)));
         textPanel.add(typeTextField);
 
         // add each panel to frame
         this.getContentPane().add(scorePanel, BorderLayout.NORTH);
         this.getContentPane().add(wordPanel, BorderLayout.CENTER);
         this.getContentPane().add(textPanel, BorderLayout.SOUTH);   
+        
     }
     
-    public void multiplayerMainGame(){
+    public void bot(){
         clearScreen();
+        backgroundImageJFrame("asset/picture/background/Artboard 3.png");
+
         // create panel and set Layout Outer
         setLayout(new BorderLayout());
         scorePanelMulti = new JPanel();
