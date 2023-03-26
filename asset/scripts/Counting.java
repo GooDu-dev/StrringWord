@@ -1,10 +1,14 @@
 package asset.scripts;
 
+import javax.swing.JLabel;
+
 public class Counting extends Thread{
-    private int n;
+    public int n;
+    private JLabel label;
     private Runnable runnable;
-    public Counting(int n){
+    public Counting(int n, JLabel label){
         this.n = n;
+        this.label = label;
     }
     public Counting(Runnable runnable){
         super(runnable);
@@ -16,10 +20,13 @@ public class Counting extends Thread{
             runnable.run();
             return;
         } 
-        for(int i=0; i<n; i++){
-            System.out.println(i);
+        while(n>0){
+            // Sytem.out.println(i);
             try{
-                wait(1000);
+                // wait(1000);
+                Thread.sleep(1000);
+                label.setText("Time : "+n);
+                System.out.println(n--);
             }catch(InterruptedException e){
                 System.out.println(e.getMessage());
             }

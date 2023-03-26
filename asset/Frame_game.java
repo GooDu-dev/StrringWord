@@ -3,8 +3,11 @@ package asset;
 import javax.print.attribute.standard.Severity;
 import javax.swing.*;
 
+import asset.scripts.Counting;
+import asset.scripts.Data;
 import asset.scripts.Server;
 import asset.scripts.User;
+import asset.scripts.Word;
 
 import java.awt.*;
 import java.io.IOException;
@@ -40,6 +43,9 @@ public class Frame_game extends JFrame {
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
         mainMenu();
+        // singleMainGame();
+        // gameOverMenu();
+        // timeUpMenu();
         this.setVisible(true);
     }
 
@@ -169,15 +175,16 @@ public class Frame_game extends JFrame {
         textPanel.setBackground(Color.green);
 
         // scorePanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
-        score.add(new JLabel("Score : 0"));
-        time.add(new JLabel("Time : 0"));
+        JLabel time_number = new JLabel("Time : 10");
+        Counting timeCurrent = new Counting(10, time_number);
+        timeCurrent.start();
+        score.add(new JLabel("Score : "+ Data.getScore()));
+        time.add(time_number);
         Life.add(new JLabel("Life : 100%"));
 
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
         scorePanel.add(Life,BorderLayout.EAST);
-
-        // todo : add logic label here
 
         // set text field 
         typeTextField = new JTextField(20);
@@ -190,6 +197,8 @@ public class Frame_game extends JFrame {
         this.getContentPane().add(scorePanel, BorderLayout.NORTH);
         this.getContentPane().add(wordPanel, BorderLayout.CENTER);
         this.getContentPane().add(textPanel, BorderLayout.SOUTH);
+
+        
     }
     
     public void multiplayerMainGame(){
