@@ -188,7 +188,12 @@ public class Frame_game extends JFrame {
         score.add(new JLabel("Score : "+ Data.score));
         time.add(time_number);
         Life.add(life_Label);
+<<<<<<< Updated upstream
         System.out.println(Word.word);
+=======
+        
+
+>>>>>>> Stashed changes
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
         scorePanel.add(Life,BorderLayout.EAST);
