@@ -15,7 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Frame_game extends JFrame {
-    private JButton play, multiplayer, exit,back, mainMenuButton;
+    private JButton play, bot, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
 
@@ -72,13 +72,13 @@ public class Frame_game extends JFrame {
         play.setContentAreaFilled(false);
         play.setBorderPainted(false);
         // create MULTIPLAYER button
-        multiplayer = new JButton(new ImageIcon("asset/picture/button/multiplayer-button.png"));
-        multiplayer.addActionListener(e -> {
+        bot = new JButton(new ImageIcon("asset/picture/button/bot-button.png"));
+        bot.addActionListener(e -> {
             ConnectIP();
         });
-        multiplayer.setOpaque(false);
-        multiplayer.setContentAreaFilled(false);
-        multiplayer.setBorderPainted(false);
+        bot.setOpaque(false);
+        bot.setContentAreaFilled(false);
+        bot.setBorderPainted(false);
         // create EXIT button
         exit = new JButton(new ImageIcon("asset/picture/button/exit-button.png"));
         exit.addActionListener(e -> System.exit(0));
@@ -90,14 +90,14 @@ public class Frame_game extends JFrame {
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
         mainMenuPanel.add(play);
         mainMenuPanel.add(Box.createVerticalStrut(20)); //space
-        mainMenuPanel.add(multiplayer);
+        mainMenuPanel.add(bot);
         mainMenuPanel.add(Box.createVerticalStrut(20)); //space
         mainMenuPanel.add(exit);
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
     
         // set button to center
         play.setAlignmentX(Component.CENTER_ALIGNMENT);
-        multiplayer.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bot.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
     
         // Add the panel to the frame
