@@ -3,6 +3,8 @@ package asset;
 import javax.print.attribute.standard.Severity;
 import javax.swing.*;
 
+import org.w3c.dom.css.Counter;
+
 import asset.scripts.Counting;
 import asset.scripts.Data;
 import asset.scripts.Server;
@@ -18,6 +20,7 @@ public class Frame_game extends JFrame {
     private JButton play, bot, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
+    public static int lifePoint = 3;
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -178,11 +181,13 @@ public class Frame_game extends JFrame {
         textPanel.setBackground(Color.green);
 
         JLabel time_number = new JLabel("Time : 10");
-        Counting timeCurrent = new Counting(10, time_number);
+        JLabel life_Label = new JLabel("Life : 3");
+        Counting timeCurrent = new Counting(10, time_number, life_Label);
         timeCurrent.start();
         score.add(new JLabel("Score : "+ Data.getScore()));
         time.add(time_number);
-        Life.add(new JLabel("Life : 100%"));
+        Life.add(life_Label);
+        
 
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
@@ -290,5 +295,12 @@ public class Frame_game extends JFrame {
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+    public static void hurt(JLabel time_number, JLabel life_text){
+        lifePoint--;
+        time_number.setText("Time : 10");
+        Counting c = new Counting(10, time_number, life_text);
+        c.start();
+        life_text.setText("Life : "+lifePoint);
     }
 }
