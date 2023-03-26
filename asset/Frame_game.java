@@ -251,15 +251,14 @@ public class Frame_game extends JFrame {
         clearScreen(); 
 
         this.setLayout(null);
-        mainMenuButton = new JButton(new ImageIcon("asset/picture/button/mainmenu-button.png"));
-        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 24));
+        mainMenuButton = new JButton(new ImageIcon("asset/picture/button/main-button.png"));
         mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
         mainMenuButton.setOpaque(false);
         mainMenuButton.setContentAreaFilled(false);
         mainMenuButton.setBorderPainted(false);
         getContentPane().add(mainMenuButton);
         mainMenuButton.addActionListener(e -> {
-            clearScreen();
+            //clearScreen();
             mainMenu();
         });
     }
