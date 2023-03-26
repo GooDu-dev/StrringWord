@@ -15,6 +15,7 @@ public class Data {
     private static final String CHAPTER = "chapter", EPISODE = "episode", HIGHEST_SCORE = "highestScore";
 
     public static int life = 3, score = 0;
+    public static int EASY = 11, MEDIUM = 8, HARD = 5;
 
     private static Map<String, Integer> loadSaved(){
         Map<String, Integer> d = new HashMap<String, Integer>();

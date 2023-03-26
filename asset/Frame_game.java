@@ -19,6 +19,7 @@ public class Frame_game extends JFrame {
     private JPanel mainMenuPanel, selecLevel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
     private JLabel word, title;
+    private int level=Data.EASY;
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -117,6 +118,7 @@ public class Frame_game extends JFrame {
         // create east button
         easy = new JButton(new ImageIcon("asset/picture/button/easy-button.png"));
         easy.addActionListener(e -> {
+            level = Data.EASY;
             singleMainGame();
         });
         easy.setOpaque(false);
@@ -125,6 +127,7 @@ public class Frame_game extends JFrame {
         // create medium button
         medium = new JButton(new ImageIcon("asset/picture/button/medium-button.png"));
         medium.addActionListener(e -> {
+            level = Data.MEDIUM;
             singleMainGame();
         });
         medium.setOpaque(false);
@@ -132,7 +135,8 @@ public class Frame_game extends JFrame {
         medium.setBorderPainted(false);
         // create hard button
         hard = new JButton(new ImageIcon("asset/picture/button/hard-button.png"));
-        medium.addActionListener(e -> {
+        hard.addActionListener(e -> {
+            level = Data.HARD;
             singleMainGame();
         });
         hard.setOpaque(false);
@@ -237,7 +241,7 @@ public class Frame_game extends JFrame {
         wordPanel.add(word,BorderLayout.CENTER);
 
 
-        JLabel time_number = new JLabel("Time : 10");
+        JLabel time_number = new JLabel("Time : "+level);
         JLabel life_Label = new JLabel("Life : "+Data.life);
         JLabel scorLabel = new JLabel("Score : "+ Data.getScore());
 
@@ -245,7 +249,7 @@ public class Frame_game extends JFrame {
         life_Label.setForeground(Color.WHITE);
         scorLabel.setForeground(Color.WHITE);
 
-        main_counting = new Counting(10, time_number, life_Label, this);
+        main_counting = new Counting(level, time_number, life_Label, this);
         main_counting.start();
         score.add(scorLabel).setFont(new Font("Verdana",Font.BOLD ,14));
         score.setOpaque(false);
@@ -275,7 +279,7 @@ public class Frame_game extends JFrame {
                 if(typeTextField.getText().toLowerCase().equals(Word.word.toLowerCase())){
                     Word.word = Word.getRandomWord();
                     word.setText(Word.word);
-                    main_counting.setN(11);
+                    main_counting.setN(level);
                     scorLabel.setText("Score : "+(++Data.score));
                 }
                 else{
@@ -372,8 +376,8 @@ public class Frame_game extends JFrame {
         if(Data.life <= 0){
             gameOverMenu();
         }
-        time_number.setText("Time : 10");
-        main_counting = new Counting(10, time_number, life_text, this);
+        time_number.setText("Time : "+level);
+        main_counting = new Counting(level, time_number, life_text, this);
         main_counting.start();
         life_text.setText("Life : "+Data.life);
     }
