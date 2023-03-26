@@ -182,7 +182,7 @@ public class Frame_game extends JFrame {
 
         JLabel time_number = new JLabel("Time : 10");
         JLabel life_Label = new JLabel("Life : 3");
-        Counting timeCurrent = new Counting(10, time_number, life_Label);
+        Counting timeCurrent = new Counting(10, time_number, life_Label, this);
         timeCurrent.start();
         score.add(new JLabel("Score : "+ Data.getScore()));
         time.add(time_number);
@@ -296,10 +296,13 @@ public class Frame_game extends JFrame {
             e.printStackTrace();
         }
     }
-    public static void hurt(JLabel time_number, JLabel life_text){
+    public void hurt(JLabel time_number, JLabel life_text){
         lifePoint--;
+        if(lifePoint <= 0){
+            gameOverMenu();
+        }
         time_number.setText("Time : 10");
-        Counting c = new Counting(10, time_number, life_text);
+        Counting c = new Counting(10, time_number, life_text, this);
         c.start();
         life_text.setText("Life : "+lifePoint);
     }

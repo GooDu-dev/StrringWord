@@ -1,5 +1,6 @@
 package asset.scripts;
 
+import java.awt.Frame;
 import java.sql.Time;
 
 import javax.naming.LinkRef;
@@ -9,12 +10,14 @@ import asset.Frame_game;
 
 public class Counting extends Thread{
     public int n;
-    private JLabel label, life;
+    private JLabel label, lifeText;
+    private Frame_game frame;
     private Runnable runnable;
-    public Counting(int n, JLabel label, JLabel life){
+    public Counting(int n, JLabel label, JLabel lifeText, Frame_game frame){
         this.n = n;
         this.label = label;
-        this.life = life;
+        this.lifeText = lifeText;
+        this.frame = frame;
     }
     public Counting(Runnable runnable){
         super(runnable);
@@ -36,6 +39,6 @@ public class Counting extends Thread{
                 System.out.println(e.getMessage());
             }
         }
-        Frame_game.hurt(label, life);;
+        frame.hurt(label, lifeText);
     }
 }
