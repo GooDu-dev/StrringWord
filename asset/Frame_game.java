@@ -272,11 +272,16 @@ public class Frame_game extends JFrame {
                 System.out.println("TextField : "+typeTextField.getText());
                 System.out.println("Word.word : "+Word.word);
                 System.out.println(typeTextField.getText().equals(Word.word));
-                if(typeTextField.getText().toLowerCase().equals(Word.word.toLowerCase())){
+                if(typeTextField.getText().equals(Word.word)){
                     Word.word = Word.getRandomWord();
+<<<<<<< Updated upstream
                     word.setText(Word.word);
                     main_counting.setN(11);
                     scorLabel.setText("Score : "+(++Data.score));
+=======
+                    timeCurrent.n = 10;
+                    Data.score++;
+>>>>>>> Stashed changes
                 }
                 else{
                     main_counting.interrupt();
