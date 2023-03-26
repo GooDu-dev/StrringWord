@@ -60,7 +60,6 @@ public class Frame_game extends JFrame {
 
     public void mainMenu() {
         // Create a JPanel with BoxLayout and center alignment
-        clearScreen();
         backgroundImageJFrame("asset/picture/background/Artboard-1.png");
         mainMenuPanel = new JPanel();
         mainMenuPanel.setBackground(new Color(255, 255, 255, 128));
