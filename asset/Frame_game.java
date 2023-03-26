@@ -1,10 +1,6 @@
 package asset;
 
-import javax.print.attribute.standard.Severity;
 import javax.swing.*;
-
-import org.w3c.dom.css.Counter;
-
 import asset.scripts.Counting;
 import asset.scripts.Data;
 import asset.scripts.Server;
@@ -22,6 +18,7 @@ public class Frame_game extends JFrame {
     private JButton play, bot, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
+    private JLabel word;
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -46,8 +43,8 @@ public class Frame_game extends JFrame {
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
-        mainMenu();
-        // singleMainGame();
+        // mainMenu();
+        singleMainGame();
         // gameOverMenu();
         // timeUpMenu();
         this.setVisible(true);
@@ -163,7 +160,6 @@ public class Frame_game extends JFrame {
 
     public void singleMainGame(){
         clearScreen();
-        backgroundImageJFrame("asset/picture/background/Artboard 3.png");
 
         // create panel and set Layout Outer
         scorePanel = new JPanel();
@@ -176,18 +172,35 @@ public class Frame_game extends JFrame {
         Life = new JPanel();
 
         // use for check area panel Can Delete If you want
-        scorePanel.setBackground(Color.orange);
-        wordPanel.setBackground(Color.cyan);
-        wordPanel.setBorder(BorderFactory.createEmptyBorder(450, 600, 0, 0));
-        textPanel.setBackground(Color.green);
+        scorePanel.setBackground(Color.DARK_GRAY);
+        wordPanel.setBackground(Color.DARK_GRAY);
+        textPanel.setBackground(Color.DARK_GRAY);
+
+        word = new JLabel("I love you");
+        word.setFont(new Font("Verdana",Font.BOLD ,14));
+        word.setForeground(Color.WHITE);
+        wordPanel.setLayout(new BorderLayout());
+        word.setHorizontalAlignment(JLabel.CENTER);
+        word.setVerticalAlignment(JLabel.CENTER);
+        wordPanel.add(word,BorderLayout.CENTER);
+
 
         JLabel time_number = new JLabel("Time : 10");
         JLabel life_Label = new JLabel("Life : 3");
+        JLabel scorLabel = new JLabel("Score : "+ Data.getScore());
+
+        time_number.setForeground(Color.WHITE);
+        life_Label.setForeground(Color.WHITE);
+        scorLabel.setForeground(Color.WHITE);
+
         Counting timeCurrent = new Counting(10, time_number, life_Label, this);
         timeCurrent.start();
-        score.add(new JLabel("Score : "+ Data.score));
-        time.add(time_number);
-        Life.add(life_Label);
+        score.add(scorLabel).setFont(new Font("Verdana",Font.BOLD ,14));
+        score.setOpaque(false);
+        time.add(time_number).setFont(new Font("Verdana",Font.BOLD ,14 ));
+        time.setOpaque(false);
+        Life.add(life_Label).setFont(new Font("Verdana",Font.BOLD ,14 ));
+        Life.setOpaque(false);
 
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
@@ -197,6 +210,9 @@ public class Frame_game extends JFrame {
         typeTextField = new JTextField(20);
         typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
+        typeTextField.setFont(new Font("Arial",Font.BOLD ,18 ));
+        typeTextField.setPreferredSize(new Dimension(150, 50));
+        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.15f)));
         textPanel.add(typeTextField);
         typeTextField.addActionListener(new ActionListener() {
             @Override
@@ -210,8 +226,7 @@ public class Frame_game extends JFrame {
                     Data.score++;
                 }
                 else{
-                    timeCurrent.stop();
-                    hurt(time_number, life_Label);
+                    
                 }
             }
         });
