@@ -267,22 +267,6 @@ public class Frame_game extends JFrame {
             mainMenu();
         });
     }
-    
-    public void timeUpMenu(){
-        clearScreen(); 
-
-        this.setLayout(null);
-        mainMenuButton = new JButton(new ImageIcon("asset/picture/button/mainmenu-button.png"));
-        mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
-        mainMenuButton.setOpaque(false);
-        mainMenuButton.setContentAreaFilled(false);
-        mainMenuButton.setBorderPainted(false);
-        getContentPane().add(mainMenuButton);
-        mainMenuButton.addActionListener(e -> {
-            clearScreen();
-            mainMenu();
-        });
-    }
 
     public void backgroundImageJFrame(String path){
         setContentPane(new JLabel(new ImageIcon(path)));
