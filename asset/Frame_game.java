@@ -15,8 +15,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Frame_game extends JFrame {
-    private JButton play, bot, exit,back, mainMenuButton;
-    private JPanel mainMenuPanel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
+    private JButton play, easy, medium, hard, exit,back, mainMenuButton;
+    private JPanel mainMenuPanel, selecLevel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
     private JLabel word;
 
@@ -43,8 +43,8 @@ public class Frame_game extends JFrame {
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
-        // mainMenu();
-        singleMainGame();
+        mainMenu();
+        // singleMainGame();
         // gameOverMenu();
         // timeUpMenu();
         this.setVisible(true);
@@ -55,10 +55,9 @@ public class Frame_game extends JFrame {
         clearScreen();
         // Create a JPanel with BoxLayout and center alignment
         clearScreen();
-        backgroundImageJFrame("asset/picture/background/Artboard-1.png");
+        //backgroundImageJFrame("asset/picture/background/Artboard-1.png");
         mainMenuPanel = new JPanel();
-        mainMenuPanel.setBackground(new Color(255, 255, 255, 128));
-        mainMenuPanel.setOpaque(false);
+        mainMenuPanel.setBackground(new Color(231,197,79,255));
         mainMenuPanel.setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
         mainMenuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -67,19 +66,11 @@ public class Frame_game extends JFrame {
         // create PLAY button
         play = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
         play.addActionListener(e -> {
-            singleMainGame();
+            selectLevel();
         });
         play.setOpaque(false);
         play.setContentAreaFilled(false);
         play.setBorderPainted(false);
-        // create MULTIPLAYER button
-        bot = new JButton(new ImageIcon("asset/picture/button/bot-button.png"));
-        bot.addActionListener(e -> {
-            ConnectIP();
-        });
-        bot.setOpaque(false);
-        bot.setContentAreaFilled(false);
-        bot.setBorderPainted(false);
         // create EXIT button
         exit = new JButton(new ImageIcon("asset/picture/button/exit-button.png"));
         exit.addActionListener(e -> System.exit(0));
@@ -90,19 +81,76 @@ public class Frame_game extends JFrame {
         // Add the buttons to the mainMenuPanel
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
         mainMenuPanel.add(play);
-        mainMenuPanel.add(Box.createVerticalStrut(20)); //space
-        mainMenuPanel.add(bot);
-        mainMenuPanel.add(Box.createVerticalStrut(20)); //space
+        // mainMenuPanel.add(Box.createVerticalStrut(20)); //space
+        // mainMenuPanel.add(bot);
+        // mainMenuPanel.add(Box.createVerticalStrut(20)); //space
         mainMenuPanel.add(exit);
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
     
         // set button to center
         play.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bot.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // bot.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
     
         // Add the panel to the frame
         getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
+
+        revalidate();
+        repaint();
+    }
+
+    public void selectLevel() {
+        // Create a JPanel with BoxLayout and center alignment
+        clearScreen();
+        selecLevel = new JPanel();
+        selecLevel.setBackground(new Color(255, 255, 255, 128));
+        selecLevel.setOpaque(false);
+        selecLevel.setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
+        selecLevel.setLayout(new BoxLayout(selecLevel, BoxLayout.Y_AXIS));
+        selecLevel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selecLevel.setAlignmentY(Component.CENTER_ALIGNMENT);
+    
+        // create east button
+        easy = new JButton(new ImageIcon("asset/picture/button/easy-button.png"));
+        easy.addActionListener(e -> {
+            singleMainGame();
+        });
+        easy.setOpaque(false);
+        easy.setContentAreaFilled(false);
+        easy.setBorderPainted(false);
+        // create medium button
+        medium = new JButton(new ImageIcon("asset/picture/button/medium-button.png"));
+        medium.addActionListener(e -> {
+            singleMainGame();
+        });
+        medium.setOpaque(false);
+        medium.setContentAreaFilled(false);
+        medium.setBorderPainted(false);
+        // create hard button
+        hard = new JButton(new ImageIcon("asset/picture/button/hard-button.png"));
+        medium.addActionListener(e -> {
+            singleMainGame();
+        });
+        hard.setOpaque(false);
+        hard.setContentAreaFilled(false);
+        hard.setBorderPainted(false);
+    
+        // Add the buttons to the mainMenuPanel
+        selecLevel.add(Box.createVerticalGlue()); // push buttons towards center vertically
+        selecLevel.add(easy);
+        selecLevel.add(Box.createVerticalStrut(20)); //space
+        selecLevel.add(medium);
+        selecLevel.add(Box.createVerticalStrut(20)); //space
+        selecLevel.add(hard);
+        selecLevel.add(Box.createVerticalGlue()); // push buttons towards center vertically
+    
+        // set button to center
+        easy.setAlignmentX(Component.CENTER_ALIGNMENT);
+        medium.setAlignmentX(Component.CENTER_ALIGNMENT);
+        hard.setAlignmentX(Component.CENTER_ALIGNMENT);
+    
+        // Add the panel to the frame
+        getContentPane().add(selecLevel, BorderLayout.CENTER);
 
         revalidate();
         repaint();
