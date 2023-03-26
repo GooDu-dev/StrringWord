@@ -18,7 +18,7 @@ public class Frame_game extends JFrame {
     private JButton play, easy, medium, hard, exit,back, mainMenuButton;
     private JPanel mainMenuPanel, selecLevel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
     private JTextField typeTextField;
-    private JLabel word;
+    private JLabel word, title;
 
     // Server & Clients
     private ServerSocket serverSocket;
@@ -64,6 +64,9 @@ public class Frame_game extends JFrame {
         mainMenuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainMenuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
     
+        //create title
+        title = new JLabel("String WORD;");
+
         // create PLAY button
         play = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
         play.addActionListener(e -> {
