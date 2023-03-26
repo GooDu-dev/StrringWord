@@ -57,8 +57,10 @@ public class Frame_game extends JFrame {
         clearScreen();
         // Create a JPanel with BoxLayout and center alignment
         clearScreen();
+        backgroundImageJFrame();
         mainMenuPanel = new JPanel();
-        mainMenuPanel.setBackground(Color.YELLOW);
+        mainMenuPanel.setBackground(new Color(255, 255, 255, 128));
+        mainMenuPanel.setOpaque(false);
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
         mainMenuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainMenuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -284,6 +286,12 @@ public class Frame_game extends JFrame {
             mainMenu();
         });
     }
+
+    public void backgroundImageJFrame(){
+        setContentPane(new JLabel(new ImageIcon("asset/picture/background/Artboard-1.png")));
+        setLayout(new FlowLayout());
+        setSize(getWidth(), getHeight());
+	}
     public void clearServer(){
         try{
             if(server != null) server.stop();   
