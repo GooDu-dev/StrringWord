@@ -39,16 +39,7 @@ public class Frame_game extends JFrame {
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
-<<<<<<< refs/remotes/origin/main
-
         mainMenu();
-        // singleMainGame();
-        // multiplayerMainGame();
-        // gameOverMenu();
-
-=======
-        mainMenu();
->>>>>>> UPDATE GUI
         this.setVisible(true);
     }
 
@@ -145,7 +136,6 @@ public class Frame_game extends JFrame {
 
         // set back button to bottom
         this.setLayout(null);
-<<<<<<< refs/remotes/origin/main
         back = new JButton(new ImageIcon("asset/picture/button/back-button.png"));
         back.setBounds(new Rectangle(100, 450, 200, 65));
         back.setOpaque(false);
@@ -155,12 +145,6 @@ public class Frame_game extends JFrame {
         back.addActionListener(e -> {
             // clearScreen();
             // mainMenu();
-=======
-        back = new JButton("Back");
-        back.setBounds(new Rectangle(120, 500, 150, 30));
-        getContentPane().add(back);
-        back.addActionListener(e -> {
->>>>>>> UPDATE GUI
             System.out.println("Debug connect ip here !");
             mainMenu();
         });
