@@ -29,16 +29,18 @@ public class Counting extends Thread{
             runnable.run();
             return;
         } 
-        while(n>=0){
-            // Sytem.out.println(i);
+        while(n>0){
             try{
-                // wait(1000);
                 Thread.sleep(1000);
-                label.setText("Time : "+n--);
+                label.setText("Time : "+--n);
             }catch(InterruptedException e){
                 System.out.println(e.getMessage());
+                break;
             }
         }
         frame.hurt(label, lifeText);
+    }
+    public void setN(int n){
+        this.n = n;
     }
 }
