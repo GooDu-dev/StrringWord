@@ -216,7 +216,8 @@ public class Frame_game extends JFrame {
                     Data.score++;
                 }
                 else{
-                    
+                    timeCurrent.stop();
+                    hurt(time_number, life_Label);
                 }
             }
         });
