@@ -19,7 +19,7 @@ public class Counting extends Thread{
         for(int i=0; i<n; i++){
             System.out.println(i);
             try{
-                sleep(1000);
+                wait(1000);
             }catch(InterruptedException e){
                 System.out.println(e.getMessage());
             }
