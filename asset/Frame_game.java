@@ -188,12 +188,7 @@ public class Frame_game extends JFrame {
         score.add(new JLabel("Score : "+ Data.score));
         time.add(time_number);
         Life.add(life_Label);
-<<<<<<< Updated upstream
-        System.out.println(Word.word);
-=======
-        
 
->>>>>>> Stashed changes
         scorePanel.add(score,BorderLayout.WEST);
         scorePanel.add(time,BorderLayout.CENTER);
         scorePanel.add(Life,BorderLayout.EAST);
@@ -206,7 +201,6 @@ public class Frame_game extends JFrame {
         typeTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 System.out.println("TextField : "+typeTextField.getText());
                 System.out.println("Word.word : "+Word.word);
                 System.out.println(typeTextField.getText().equals(Word.word));
