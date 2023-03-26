@@ -33,7 +33,7 @@ public class Word {
     }
     public static String getRandomWord(){
         if(words.size() == 0) words = loadWord();
-        int index = (new Random().nextInt(words.size()+1)*100000)%(words.size()+1);
+        int index = (new Random().nextInt(words.size()  )*100000)%(words.size()+1);
         if(usedWords.contains(words.get(index))) return getRandomWord();
         usedWords.add(words.get(index));
         return words.get(index);
