@@ -25,6 +25,7 @@ public class Frame_game extends JFrame {
     private Server server;
     private Thread server_thread;
     
+    private Counting main_counting;
     public Frame_game(){
         DEFAULT();
     }
@@ -220,9 +221,9 @@ public class Frame_game extends JFrame {
                 System.out.println("TextField : "+typeTextField.getText());
                 System.out.println("Word.word : "+Word.word);
                 System.out.println(typeTextField.getText().equals(Word.word));
-                if(typeTextField.getText().equals(Word.word)){
+                if(typeTextField.getText().toLowerCase().equals(Word.word.toLowerCase())){
                     Word.word = Word.getRandomWord();
-                    timeCurrent.n = 10;
+                    main_counting.setN(10);
                     Data.score++;
                 }
                 else{
@@ -294,6 +295,7 @@ public class Frame_game extends JFrame {
         mainMenuButton.setContentAreaFilled(false);
         mainMenuButton.setBorderPainted(false);
         getContentPane().add(mainMenuButton);
+        Data.life = 3;
         mainMenuButton.addActionListener(e -> {
             //clearScreen();
             mainMenu();
@@ -318,8 +320,8 @@ public class Frame_game extends JFrame {
             gameOverMenu();
         }
         time_number.setText("Time : 10");
-        Counting c = new Counting(10, time_number, life_text, this);
-        c.start();
+        main_counting = new Counting(10, time_number, life_text, this);
+        main_counting.start();
         life_text.setText("Life : "+Data.life);
     }
 }
