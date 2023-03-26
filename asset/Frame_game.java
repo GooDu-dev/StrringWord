@@ -228,7 +228,7 @@ public class Frame_game extends JFrame {
         wordPanel.setBackground(Color.DARK_GRAY);
         textPanel.setBackground(Color.DARK_GRAY);
 
-        word = new JLabel("I love you");
+        word = new JLabel(Word.word);
         word.setFont(new Font("Verdana",Font.BOLD ,14));
         word.setForeground(Color.WHITE);
         wordPanel.setLayout(new BorderLayout());
@@ -238,15 +238,15 @@ public class Frame_game extends JFrame {
 
 
         JLabel time_number = new JLabel("Time : 10");
-        JLabel life_Label = new JLabel("Life : 3");
+        JLabel life_Label = new JLabel("Life : "+Data.life);
         JLabel scorLabel = new JLabel("Score : "+ Data.getScore());
 
         time_number.setForeground(Color.WHITE);
         life_Label.setForeground(Color.WHITE);
         scorLabel.setForeground(Color.WHITE);
 
-        Counting timeCurrent = new Counting(10, time_number, life_Label, this);
-        timeCurrent.start();
+        main_counting = new Counting(10, time_number, life_Label, this);
+        main_counting.start();
         score.add(scorLabel).setFont(new Font("Verdana",Font.BOLD ,14));
         score.setOpaque(false);
         time.add(time_number).setFont(new Font("Verdana",Font.BOLD ,14 ));
@@ -274,12 +274,14 @@ public class Frame_game extends JFrame {
                 System.out.println(typeTextField.getText().equals(Word.word));
                 if(typeTextField.getText().toLowerCase().equals(Word.word.toLowerCase())){
                     Word.word = Word.getRandomWord();
-                    main_counting.setN(10);
-                    Data.score++;
+                    word.setText(Word.word);
+                    main_counting.setN(11);
+                    scorLabel.setText("Score : "+(++Data.score));
                 }
                 else{
-                    
+                    main_counting.interrupt();
                 }
+                typeTextField.setText("");
             }
         });
 
