@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Data {
     private static final String PATH = "./asset/data/data.txt";
     private static Map<String, Integer> data = loadSaved();
-    private static final String CHAPTER = "chapter", EPISODE = "episode", HIGHEST_SCORE = "highestScore";
+    private static final String HIGHEST_SCORE = "highestScore";
 
     public static int life = 3, score = 0;
     public static int EASY = 11, MEDIUM = 8, HARD = 5;
@@ -47,14 +47,6 @@ public class Data {
     public static Map<String, Integer> getData(){
         if(data.size() == 0) data = loadSaved();
         return data;
-    }
-    public static int getChapter(){
-        if(!data.keySet().contains(CHAPTER)) return -1;
-        return data.get(CHAPTER);
-    }
-    public static int getEpisode(){
-        if(!data.keySet().contains(EPISODE)) return -1;
-        return data.get(EPISODE);
     }
     public static int getHighestScore(){
         if(!data.keySet().contains(HIGHEST_SCORE)) return -1;

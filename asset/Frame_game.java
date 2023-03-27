@@ -239,8 +239,6 @@ public class Frame_game extends JFrame {
 
     public void gameOverMenu(){
         clearScreen();
-        Data.life = 3;
-        Data.score = 0;
 
         JLabel gameOverText = new JLabel("GAME OVER");
         gameOverText.setForeground(Color.RED);
@@ -258,6 +256,17 @@ public class Frame_game extends JFrame {
         scorLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
         getContentPane().add(scorLabel);
 
+        JLabel scorLabel2 = new JLabel("Current Score : "+Data.score);
+        scorLabel2.setForeground(Color.GREEN);
+        scorLabel2.setBounds(100, 125, 200, 50); // set the position and size of the label
+        scorLabel2.setFont(new Font("Impact", Font.BOLD, 20));
+        scorLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        scorLabel2.setAlignmentY(Component.CENTER_ALIGNMENT);
+        getContentPane().add(scorLabel2);
+
+        Data.life = 3;
+        Data.score = 0;
+        
         mainMenuButton = new JButton(new ImageIcon("asset/picture/button/main-button.png"));
         mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
         mainMenuButton.setOpaque(false);
