@@ -3,28 +3,17 @@ package asset;
 import javax.swing.*;
 import asset.scripts.Counting;
 import asset.scripts.Data;
-import asset.scripts.Server;
-import asset.scripts.User;
 import asset.scripts.Word;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Frame_game extends JFrame {
-    private JButton play, easy, medium, hard, exit,back, mainMenuButton;
-    private JPanel mainMenuPanel, selecLevel, scorePanel,scorePanelMulti, wordPanel, textPanel,score,time,Life,score_p1,score_p2;
+    private JButton gameName, play, easy, medium, hard, exit,back, mainMenuButton;
+    private JPanel mainMenuPanel, selecLevel, scorePanel, wordPanel, textPanel,score,time,Life;
     private JTextField typeTextField;
-    private JLabel word, title;
+    private JLabel word,title;
     private int level=Data.EASY;
-
-    // Server & Clients
-    private ServerSocket serverSocket;
-    private Server server;
-    private Thread server_thread;
     
     private Counting main_counting;
     public Frame_game(){
@@ -41,33 +30,32 @@ public class Frame_game extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         // Icon Game
-        ImageIcon icon = new ImageIcon("");
+        ImageIcon icon = new ImageIcon("asset/picture/background/content.png");
         this.setIconImage(icon.getImage());
         // Set Background
         this.getContentPane().setBackground(Color.BLACK);
         mainMenu();
         // singleMainGame();
-        // gameOverMenu();
+         //gameOverMenu();
         // timeUpMenu();
         this.setVisible(true);
     }
 
-
     public void mainMenu() {
         clearScreen();
         // Create a JPanel with BoxLayout and center alignment
-        clearScreen();
         //backgroundImageJFrame("asset/picture/background/Artboard-1.png");
         mainMenuPanel = new JPanel();
         mainMenuPanel.setBackground(new Color(231,197,79,255));
-        mainMenuPanel.setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
         mainMenuPanel.setLayout(new BoxLayout(mainMenuPanel, BoxLayout.Y_AXIS));
         mainMenuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainMenuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-    
-        //create title
-        title = new JLabel("String WORD;");
 
+        gameName = new JButton("String WORD;");
+        gameName.setFont(new Font("Aria", Font.BOLD, 35));
+        gameName.setOpaque(false);
+        gameName.setContentAreaFilled(false);
+        gameName.setBorderPainted(false);
         // create PLAY button
         play = new JButton(new ImageIcon("asset/picture/button/play-button.png"));
         play.addActionListener(e -> {
@@ -85,16 +73,16 @@ public class Frame_game extends JFrame {
     
         // Add the buttons to the mainMenuPanel
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
+        mainMenuPanel.add(gameName);
+        mainMenuPanel.add(Box.createVerticalStrut(20)); //space
         mainMenuPanel.add(play);
-        // mainMenuPanel.add(Box.createVerticalStrut(20)); //space
-        // mainMenuPanel.add(bot);
-        // mainMenuPanel.add(Box.createVerticalStrut(20)); //space
+        mainMenuPanel.add(Box.createVerticalStrut(20)); //space
         mainMenuPanel.add(exit);
         mainMenuPanel.add(Box.createVerticalGlue()); // push buttons towards center vertically
     
         // set button to center
+        gameName.setAlignmentX(Component.CENTER_ALIGNMENT);
         play.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // bot.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
     
         // Add the panel to the frame
@@ -108,9 +96,7 @@ public class Frame_game extends JFrame {
         // Create a JPanel with BoxLayout and center alignment
         clearScreen();
         selecLevel = new JPanel();
-        selecLevel.setBackground(new Color(255, 255, 255, 128));
-        selecLevel.setOpaque(false);
-        selecLevel.setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
+        selecLevel.setBackground(new Color(231,197,79,255));
         selecLevel.setLayout(new BoxLayout(selecLevel, BoxLayout.Y_AXIS));
         selecLevel.setAlignmentX(Component.CENTER_ALIGNMENT);
         selecLevel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -170,50 +156,6 @@ public class Frame_game extends JFrame {
         getContentPane().repaint();
     }
 
-    public void ConnectIP(){
-        clearScreen(); 
-        
-        String ip = Server.generateIP();
-        if(ip != null){
-            if(server == null){
-                try{
-                    serverSocket = new ServerSocket(1234);
-                    Server server = new Server(serverSocket);
-                    server_thread = new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            while(!serverSocket.isClosed()){
-                                server.start();
-                            }
-                            server.stop();
-                            clearServer();
-                        }
-                    });
-                    server_thread.start();
-                }
-                catch(IOException e){
-                    System.out.println(e);
-                    clearServer();
-                }
-            }
-        }
-
-        // set back button to bottom
-        this.setLayout(null);
-        back = new JButton(new ImageIcon("asset/picture/button/back-button.png"));
-        back.setBounds(new Rectangle(100, 450, 200, 65));
-        back.setOpaque(false);
-        back.setContentAreaFilled(false);
-        back.setBorderPainted(false);
-        getContentPane().add(back);
-        back.addActionListener(e -> {
-            // clearScreen();
-            // mainMenu();
-            System.out.println("Debug connect ip here !");
-            mainMenu();
-        });
-    }
-
     public void singleMainGame(){
         clearScreen();
 
@@ -233,7 +175,7 @@ public class Frame_game extends JFrame {
         textPanel.setBackground(Color.DARK_GRAY);
 
         word = new JLabel(Word.word);
-        word.setFont(new Font("Verdana",Font.BOLD ,14));
+        word.setFont(new Font("Verdana",Font.BOLD ,25));
         word.setForeground(Color.WHITE);
         wordPanel.setLayout(new BorderLayout());
         word.setHorizontalAlignment(JLabel.CENTER);
@@ -243,7 +185,7 @@ public class Frame_game extends JFrame {
 
         JLabel time_number = new JLabel("Time : "+level);
         JLabel life_Label = new JLabel("Life : "+Data.life);
-        JLabel scorLabel = new JLabel("Score : "+ Data.getScore());
+        JLabel scorLabel = new JLabel("Score : "+ Data.score);
 
         time_number.setForeground(Color.WHITE);
         life_Label.setForeground(Color.WHITE);
@@ -276,16 +218,11 @@ public class Frame_game extends JFrame {
                 System.out.println("TextField : "+typeTextField.getText());
                 System.out.println("Word.word : "+Word.word);
                 System.out.println(typeTextField.getText().equals(Word.word));
-                if(typeTextField.getText().equals(Word.word)){
+                if(typeTextField.getText().toLowerCase().equals(Word.word.toLowerCase())){
                     Word.word = Word.getRandomWord();
-<<<<<<< Updated upstream
                     word.setText(Word.word);
                     main_counting.setN(level);
                     scorLabel.setText("Score : "+(++Data.score));
-=======
-                    timeCurrent.n = 10;
-                    Data.score++;
->>>>>>> Stashed changes
                 }
                 else{
                     main_counting.interrupt();
@@ -299,86 +236,39 @@ public class Frame_game extends JFrame {
         this.getContentPane().add(wordPanel, BorderLayout.CENTER);
         this.getContentPane().add(textPanel, BorderLayout.SOUTH);   
     }
-    
-    public void multiplayerMainGame(){
-        clearScreen();
-        // create panel and set Layout Outer
-        setLayout(new BorderLayout());
-        scorePanelMulti = new JPanel();
-        wordPanel = new JPanel();
-        textPanel = new JPanel();
-
-        // panel of scorePanelMulti Inner
-        score_p1 = new JPanel();
-        score_p2 = new JPanel();
-        time = new JPanel();
-
-        // use for cheack area panel Can Delete If you want
-        scorePanelMulti.setBackground(Color.orange);
-        wordPanel.setBackground(Color.cyan);
-        textPanel.setBackground(Color.green);
-
-        // scorePanelMulti.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
-        score_p1.add(new JLabel("Score P1 : 0"));
-        score_p2.add(new JLabel("Score P2 : 0"));
-        time.add(new JLabel("Time : 0"));
-
-        scorePanelMulti.add(score_p1,BorderLayout.WEST);
-        scorePanelMulti.add(time,BorderLayout.CENTER);
-        scorePanelMulti.add(score_p2,BorderLayout.EAST);
-
-        scorePanelMulti.add(score_p1, BorderLayout.WEST);
-        scorePanelMulti.add(time, BorderLayout.CENTER);
-        scorePanelMulti.add(score_p2, BorderLayout.EAST);
-        scorePanelMulti.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.05f)));
-
-        // todo : add logic label here
-        JLabel randomWord = new JLabel();
-        wordPanel.add(randomWord);
-
-        typeTextField = new JTextField(20);
-        typeTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        typeTextField.setAlignmentY(Component.CENTER_ALIGNMENT);
-        textPanel.setPreferredSize(new Dimension(getWidth(), (int)(getHeight() * 0.1f)));
-        textPanel.add(typeTextField);
-
-        getContentPane().add(scorePanelMulti, BorderLayout.NORTH);
-        getContentPane().add(wordPanel, BorderLayout.CENTER);
-        getContentPane().add(textPanel, BorderLayout.SOUTH);
-    }
 
     public void gameOverMenu(){
-        clearScreen(); 
+        clearScreen();
+        Data.life = 3;
+        Data.score = 0;
 
-        this.setLayout(null);
+        JLabel gameOverText = new JLabel("GAME OVER");
+        gameOverText.setForeground(Color.RED);
+        gameOverText.setBounds(100, 100, 200, 50); // set the position and size of the label
+        gameOverText.setFont(new Font("Impact", Font.BOLD, 30));
+        gameOverText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameOverText.setAlignmentY(Component.CENTER_ALIGNMENT);
+        getContentPane().add(gameOverText);
+
         mainMenuButton = new JButton(new ImageIcon("asset/picture/button/main-button.png"));
         mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
         mainMenuButton.setOpaque(false);
         mainMenuButton.setContentAreaFilled(false);
         mainMenuButton.setBorderPainted(false);
         getContentPane().add(mainMenuButton);
-        Data.life = 3;
+        
         mainMenuButton.addActionListener(e -> {
-            //clearScreen();
+            clearScreen();
             mainMenu();
         });
     }
 
-    public void backgroundImageJFrame(String path){
-        setContentPane(new JLabel(new ImageIcon(path)));
-        setLayout(new FlowLayout());
-        setSize(getWidth(), getHeight());
-	}
-    public void clearServer(){
-        try{
-            if(server != null) server.stop();   
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }
     public void hurt(JLabel time_number, JLabel life_text){
         Data.life--;
         if(Data.life <= 0){
+            if(Data.score >= Data.getHighestScore()){
+                Data.setHighestScore(Data.score);
+            }
             gameOverMenu();
         }
         time_number.setText("Time : "+level);

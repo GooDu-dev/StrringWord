@@ -56,8 +56,21 @@ public class Data {
         if(!data.keySet().contains(EPISODE)) return -1;
         return data.get(EPISODE);
     }
-    public static int getScore(){
+    public static int getHighestScore(){
         if(!data.keySet().contains(HIGHEST_SCORE)) return -1;
         return data.get(HIGHEST_SCORE);
+    }
+    public static void setHighestScore(int score){
+        try{
+            FileWriter fw = new FileWriter(new File(PATH));
+            fw.write("chapter:1\n");
+            fw.write("episode:1\n");
+            fw.write("highestScore:"+score+"\n");
+            fw.close();
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+        data = loadSaved();
     }
 }

@@ -1,11 +1,6 @@
 package asset.scripts;
 
-import java.awt.Frame;
-import java.sql.Time;
-
-import javax.naming.LinkRef;
 import javax.swing.JLabel;
-
 import asset.Frame_game;
 
 public class Counting extends Thread{
