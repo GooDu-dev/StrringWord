@@ -250,6 +250,14 @@ public class Frame_game extends JFrame {
         gameOverText.setAlignmentY(Component.CENTER_ALIGNMENT);
         getContentPane().add(gameOverText);
 
+        JLabel scorLabel = new JLabel("Highest Score : "+Data.getHighestScore());
+        scorLabel.setForeground(Color.GREEN);
+        scorLabel.setBounds(100, 150, 200, 50); // set the position and size of the label
+        scorLabel.setFont(new Font("Impact", Font.BOLD, 20));
+        scorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        scorLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        getContentPane().add(scorLabel);
+
         mainMenuButton = new JButton(new ImageIcon("asset/picture/button/main-button.png"));
         mainMenuButton.setBounds(new Rectangle(100, 450, 200, 65));
         mainMenuButton.setOpaque(false);
