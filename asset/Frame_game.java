@@ -225,7 +225,7 @@ public class Frame_game extends JFrame {
                     scorLabel.setText("Score : "+(++Data.score));
                 }
                 else{
-                    main_counting.interrupt();
+                    if(main_counting.isAlive()) main_counting.interrupt();
                 }
                 typeTextField.setText("");
             }
